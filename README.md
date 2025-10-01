@@ -1,33 +1,52 @@
-## Práctica 2. Funciones básicas de OpenCV
+# Práctica 3 - Visión por Computador
 
-### Contenidos
+En esta práctica seguimos realizando ejercicios de procesamiento de imágenes, aplicando técnicas vistas en clase como Canny, Sobel y detección de movimiento.
 
-[Aspectos cubiertos](#21-aspectos-cubiertos)  
-[Entrega](#22-entrega)  
+## Tarea 1
 
-### 2.1. Aspectos cubiertos
+En esta tarea contamos los píxeles blancos por filas, de manera similar a cómo se hizo previamente por columnas. Utilizamos una imagen con detección de bordes mediante Canny para identificar el valor máximo de píxeles blancos en las filas y determinar cuáles superan el 90% de este máximo.
 
-La práctica precedente aborda el modo de acceder al valor asociado a un píxel, así como su modificación. Dicha capacidad abre muchísimas posibilidades, existiendo un nutrido grupo de operaciones básicas, habitualmente presentes en bibliotecas como la que utilizaremos a lo largo del curso: [OpenCV](https://opencv.org).
+**Resultados:**
+- Máximo número de píxeles blancos en filas: 0.4296875
+- Filas con ≥ 90% del máximo (0.38671875 píxeles): [6, 12, 15, 20, 21, 88, 100]
 
-El cuaderno proporcionado para esta práctica (*VC_P2.ipynb*), recuerda en primer término la conversión de formato del espacio de color, tanto la conversión a grises, como a otros espacios de representación, que facilitan determinadas operaciones. Tras repasar el manejo de dichas utilidades, el cuaderno cubre un conjunto de funciones básicas de procesamiento de imágenes disponibles en OpenCV, como son las utilidades ya mencionadas de conversión de espacio de color, añadiendo las de cálculo de bordes o contornos, umbralizado, histogramas, diferencias de fotogramas o sustracción de fondo, etc., además de moestrar alternativas para escribir texto sobre la imagen. Para los ejemplos usando *PILimage* puede ser necesario instalar un nuevo paquete.
+![Mandril Canny](./mandril_canny.png)
+![Filas Canny](./filas_canny.png)
 
-```
-pip install Pillow
-```
+---
 
-### 2.2. Entrega
+## Tarea 2
 
-A lo largo del cuaderno se propone resolver algunas variaciones sobre el código proporcionado. Además de dichas tareas concretas, en la parte final se proponen tareas con un objetivo más abierto otorgando mayor libertad en cuanto al resultado a producir:
+Aquí comparamos los resultados obtenidos usando Canny y Sobel. Realizamos el conteo de valores no nulos como en el caso de Canny, y representamos mediante líneas azules y rojas las zonas con bordes horizontales y verticales más relevantes.
 
-- Desarrollar un demostrador que capture las imágenes de la cámara, y les permita *exhibir* lo aprendido en estas dos primeras prácticas ante quienes no cursen la asignatura de Visión por Computador :) . Es por ello que además de poder mostrar la imagen original de la webcam, sea posible de forma interactiva cambiar de modo, incluyendo al menos dos modos diferentes que muestren el resultado de aplicar funciones de OpenCV trabajadas hasta ahora.
+**Resultados Sobel:**
+- Máximo columnas: 0.427734375, destacadas: [104, 105, 127, 288]
+- Máximo filas: 0.421875, destacadas: [2, 3, 4, 5, 8, 11, 12, 19, 20, 24, 51, 80, 81, 82, 83, 84, 85, 87, 100]
 
-- Por otro lado, plantear una reinterpretación de la parte de procesamiento de la imagen tomando como posible punto de partida alguna de las siguientes instalaciones:
+![Filas y columnas destacadas Sobel](./columnas_y_filas_mandril.png)
+![Columnas Sobel](./columnas_sobbel.png)
+![Filas Sobel](./filas_sobbel.png)
 
-  - [My little piece of privacy](https://www.niklasroy.com/project/88/my-little-piece-of-privacy), por Niklas Roy   
-  - [Messa di voce](https://youtu.be/GfoqiyB1ndE?feature=shared), por Golan Levin y Zachary Lieberman
-  - [Virtual air guitar](https://youtu.be/FIAmyoEpV5c?feature=shared)
+También añadimos las imágenes de Canny para compararlas:
 
-No olvidar todas las indicaciones dadas en la práctica anterior sobre la entrega: **enlace github** por medio del campus virtual incluyendo **cuaderno(s)** resolviendo las tareas y su correspondiente **README**.
+![Filas Canny](./filas_canny.png)
+![Columnas Canny](./columnas_canny.png)
 
-***
-Bajo licencia de Creative Commons Reconocimiento - No Comercial 4.0 Internacional
+Se puede observar que Canny controla mejor los falsos máximos gracias a la supresión de máximos locales.
+
+---
+
+## Tarea 3
+
+En esta sección propuse dos procesamientos para vídeo en tiempo real. El primero aplica la detección de bordes de Canny sobre la cámara. El segundo detecta movimiento usando una máscara roja, resaltando las zonas en movimiento sobre la imagen original.
+
+![Canny en vídeo](./tarea3_canny.png)
+![Detección de movimiento](./tarea3_movimiento.png)
+
+---
+
+## Tarea 4
+
+Inspirado en los vídeos propuestos, creé un demostrador similar a *My Little Piece of Privacy*. En mi propuesta, un círculo sigue la cara que aparece en la cámara, mostrando la interacción de manera visual.
+
+![Círculo sobre la cara](./tarea4.png)
